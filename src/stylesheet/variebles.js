@@ -2,6 +2,7 @@ export const variables = {
   color: {
     bgPrimary: "#F8F8F8",
     bgSecondary: "#FFF",
+    bgLight: "rgba(133, 170, 159, 0.10)",
     textPrimary: "#121417",
     textSecondary: "rgba(18, 20, 23, 0.80)",
     accent: "#85AA9F",
@@ -9,6 +10,8 @@ export const variables = {
     borderInput: "rgba(18, 20, 23, 0.10)",
     error: "#D80027",
     success: "#3CBF61",
+    buttonWhite: "#fcfcfc",
+    linkBtn: "rgba(18, 20, 23, 0.50)",
   },
   fonts: {
     regular: "MacPawFixelDisplay-Regular",

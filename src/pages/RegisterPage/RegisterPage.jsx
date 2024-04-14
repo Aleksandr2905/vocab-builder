@@ -1,5 +1,15 @@
+import Logo from "../../components/Logo/Logo";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import * as s from "./RegisterPage.styled";
+
 const RegisterPage = () => {
-  return <div>RegisterPage</div>;
+  return (
+    <s.Section>
+      <Logo />
+      <s.Img />
+      <RegisterForm />
+    </s.Section>
+  );
 };
 
 export default RegisterPage;
