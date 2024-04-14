@@ -4,14 +4,18 @@ import { loginSchema } from "../../helpers/validation";
 import InputForm from "../InputForm/InputForm";
 import * as s from "./LoginForm.styled";
 import { loginText } from "../../helpers/dataText";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginThunk } from "../../redux/auth/operations";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, touchedFields },
-    reset,
   } = useForm({
     mode: "onTouched",
     resolver: yupResolver(loginSchema),
@@ -21,8 +25,11 @@ const LoginForm = () => {
   const password = watch("password");
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    dispatch(loginThunk(data)).then((response) => {
+      if (!response.error) {
+        navigate("/dictionary");
+      }
+    });
   };
 
   return (
