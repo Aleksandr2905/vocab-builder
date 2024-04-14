@@ -64,12 +64,9 @@ export const ErrorText = styled.p`
   color: ${variables.color.error};
 
   /* &::before {
-    content: url(${sprite}error);
+    content: url(${error});
     display: inline-block;
     margin-right: 4px;
-    background-image: url(${sprite}error);
-    width: 16px;
-    height: 16px;
   } */
 `;
 

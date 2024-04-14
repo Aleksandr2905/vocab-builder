@@ -18,3 +18,14 @@ export const registerSchema = yup.object().shape({
     .required("Field is required")
     .matches(passwordRegexp, "Error password"),
 });
+
+export const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Field is required")
+    .matches(emailRegexp, "Error email"),
+  password: yup
+    .string()
+    .required("Field is required")
+    .matches(passwordRegexp, "Error password"),
+});
