@@ -13,7 +13,7 @@ import {
 import { authReducer } from "./auth/slice";
 
 const persistConfig = {
-  key: "root",
+  key: "auth",
   storage,
   whitelist: ["token"],
 };

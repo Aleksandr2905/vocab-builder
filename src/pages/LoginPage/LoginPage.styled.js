@@ -9,7 +9,7 @@ export const Section = styled.section`
   height: 100vh;
 
   > :first-child {
-    padding: 12px 0 0 12px;
+    padding: 16px 0 0 16px;
   }
 `;
 

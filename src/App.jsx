@@ -6,8 +6,17 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import DictionaryPage from "./pages/DictionaryPage/DictionaryPage";
 import RecommendPage from "./pages/RecommendPage/RecommendPage";
 import TrainingPage from "./pages/TrainingPage/TrainingPage";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { currentUserThunk } from "./redux/auth/operations";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(currentUserThunk());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>

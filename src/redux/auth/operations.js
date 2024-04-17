@@ -1,14 +1,25 @@
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { login, logout, register } from "../../service/api";
+
+axios.defaults.baseURL = "https://vocab-builder-backend.p.goit.global/api";
+
+export const setToken = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearToken = () => {
+  axios.defaults.headers.common.Authorization = "";
+};
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await register(credentials);
+      const { data } = await axios.post("/users/signup", credentials);
+      setToken(data.token);
       toast.success("Successful operation");
-      return response;
+      return data;
     } catch (error) {
       switch (error.response?.status) {
         case 400:
@@ -34,9 +45,10 @@ export const loginThunk = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await login(credentials);
+      const { data } = await axios.post("/users/signin", credentials);
+      setToken(data.token);
       toast.success("Successful operation");
-      return response;
+      return data;
     } catch (error) {
       switch (error.response?.status) {
         case 400:
@@ -62,7 +74,8 @@ export const logOutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await logout();
+      await axios.post("/users/signout");
+      clearToken();
       toast.success("Successful operation");
       return;
     } catch (error) {
@@ -79,6 +92,23 @@ export const logOutThunk = createAsyncThunk(
         default:
           return rejectWithValue(error);
       }
+    }
+  }
+);
+
+export const currentUserThunk = createAsyncThunk(
+  "auth/current",
+  async (_, { rejectWithValue, getState }) => {
+    const token = getState().token;
+    if (token === null) {
+      throw new Error("Token is missing");
+    }
+    try {
+      setToken(token);
+      const { data } = await axios.get("/users/current");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

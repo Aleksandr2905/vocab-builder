@@ -9,3 +9,21 @@ export const loginText = {
   title: "Login",
   description: "Please enter your login details to continue using our service:",
 };
+
+export const userNav = [
+  {
+    id: 1,
+    to: "/dictionary",
+    text: "Dictionary",
+  },
+  {
+    id: 2,
+    to: "/recommend",
+    text: "Recommend",
+  },
+  {
+    id: 3,
+    to: "/training",
+    text: "Training",
+  },
+];
