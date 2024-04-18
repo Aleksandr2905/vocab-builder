@@ -1,15 +1,15 @@
-import { NavLink } from "react-router-dom";
 import { userNav } from "../../helpers/dataText";
+import * as s from "./UserNav.styled";
 
 const UserNav = () => {
   return (
-    <nav>
+    <s.Navigation>
       {userNav.map((item) => (
-        <NavLink key={item.id} to={item.to}>
+        <s.NavBtn key={item.id} to={item.to}>
           {item.text}
-        </NavLink>
+        </s.NavBtn>
       ))}
-    </nav>
+    </s.Navigation>
   );
 };
 

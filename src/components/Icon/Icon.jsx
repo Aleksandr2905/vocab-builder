@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import sprite from "../../assets/icons/sprite.svg";
 
 const Icon = ({ iconName, width, height, fill, stroke }) => {

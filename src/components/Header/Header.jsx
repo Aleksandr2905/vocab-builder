@@ -1,14 +1,17 @@
+import LogOut from "../LogOut/LogOut";
 import Logo from "../Logo/Logo";
 import UserBar from "../UserBar/UserBar";
 import UserNav from "../UserNav/UserNav";
+import * as s from "./Header.styled";
 
 const Header = () => {
   return (
-    <div>
+    <s.Wrapper>
       <Logo />
       <UserNav />
       <UserBar />
-    </div>
+      <LogOut />
+    </s.Wrapper>
   );
 };
 

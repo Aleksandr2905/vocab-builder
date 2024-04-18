@@ -4,6 +4,7 @@ export const variables = {
     bgSecondary: "#FFF",
     bgLight: "rgba(133, 170, 159, 0.10)",
     textPrimary: "#121417",
+    textPrimary50: "#12141750",
     textSecondary: "rgba(18, 20, 23, 0.80)",
     accent: "#85AA9F",
     accentLight: "#A5C0B8",
