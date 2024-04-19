@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectName } from "../../redux/auth/selectors";
 import Icon from "../Icon/Icon";
 import { variables } from "../../stylesheet/variebles";
 import * as s from "./UserBar.styled";
+import { selectName } from "../../redux/selectors";
 
 const UserBar = () => {
   const name = useSelector(selectName);
