@@ -26,7 +26,6 @@ import {
 
 const AuthPage = () => {
   const { id } = useParams();
-  console.log(id);
 
   return (
     <>

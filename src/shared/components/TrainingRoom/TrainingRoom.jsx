@@ -93,9 +93,9 @@ const TrainingRoom = ({
     setUaTranslation("");
     setEnTranslation("");
   };
-  useEffect(() => {
-    console.log("use", answers);
-  }, [answers]);
+  // useEffect(() => {
+  //   console.log("use", answers);
+  // }, [answers]);
 
   const handleSaveClick = () => {
     if (answers.length === currentTaskIndex) {
