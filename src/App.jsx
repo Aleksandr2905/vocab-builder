@@ -33,28 +33,28 @@ function App() {
       ) : (
         <>
           <Routes>
-            {/* <Route path="/" element={<Layout />}> */}
-            <Route
-              path="/"
-              element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
-            ></Route>
-            <Route
-              path="/:id"
-              element={
-                <PublicRoute restricted>
-                  <AuthPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/home/:id"
-              element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
-            />
-            <Route
-              path="/training"
-              element={<PrivateRoute>{<TrainingPage />}</PrivateRoute>}
-            />
-            {/* </Route> */}
+            <Route path="/" element={<Layout />}>
+              <Route
+                path="/"
+                element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
+              ></Route>
+              <Route
+                path="/:id"
+                element={
+                  <PublicRoute restricted>
+                    <AuthPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/home/:id"
+                element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
+              />
+              <Route
+                path="/training"
+                element={<PrivateRoute>{<TrainingPage />}</PrivateRoute>}
+              />
+            </Route>
             <Route path="*" element={<AuthPage />} />
           </Routes>
           <ToastContainer />
