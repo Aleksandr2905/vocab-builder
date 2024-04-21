@@ -55,7 +55,7 @@ function App() {
                 element={<PrivateRoute>{<TrainingPage />}</PrivateRoute>}
               />
             </Route>
-            <Route path="*" element={<AuthPage />} />
+            {/* <Route path="*" element={<AuthPage />} /> */}
           </Routes>
           <ToastContainer />
         </>
