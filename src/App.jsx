@@ -35,7 +35,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route
-                path="/"
+                index
                 element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
               ></Route>
               <Route
