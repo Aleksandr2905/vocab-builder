@@ -1,31 +1,32 @@
 import * as yup from "yup";
 
-const emailRegexp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-const passwordRegexp = /^(?=.*[a-zA-Z]{6})(?=.*\d)[a-zA-Z\d]{7}$/;
-
-export const registerSchema = yup.object().shape({
+export const registerSchema = yup.object({
   name: yup
     .string()
-    .required("Field is required")
-    .min(3, "Minimum 3 characters")
-    .max(64, "Maximum 64 characters"),
-  email: yup
-    .string()
-    .required("Field is required")
-    .matches(emailRegexp, "Error email"),
+    .required("Please enter your name")
+    .min(2, "Min length 2 symbols")
+    .max(32, "Max length 32 symbols")
+    .matches(
+      /^[a-zA-Z0-9!@#$%^&*()_+[\]{}|;':",.<>?`~\-=_]+$/,
+      "Use valid characters"
+    ),
   password: yup
     .string()
-    .required("Field is required")
-    .matches(passwordRegexp, "Error password"),
-});
+    .required("Please enter a password")
+    .min(7, "Min length 7 symbols")
+    .max(7, "Max length 7 symbols")
+    .matches(
+      /^(?=.*[a-zA-Z]{6})(?=.*\d)[a-zA-Z\d]{7}$/,
+      "6 English letters and 1 number"
+    )
+    .test(
+      "no-spaces",
+      "Password cannot contain spaces",
+      (value) => !/\s/.test(value)
+    ),
 
-export const loginSchema = yup.object().shape({
   email: yup
     .string()
-    .required("Field is required")
-    .matches(emailRegexp, "Error email"),
-  password: yup
-    .string()
-    .required("Field is required")
-    .matches(passwordRegexp, "Error password"),
+    .required("Please enter an email")
+    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Enter a valid email address"),
 });

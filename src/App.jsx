@@ -1,92 +1,67 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import DictionaryPage from "./pages/DictionaryPage/DictionaryPage";
-import RecommendPage from "./pages/RecommendPage/RecommendPage";
-import TrainingPage from "./pages/TrainingPage/TrainingPage";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { currentUserThunk } from "./redux/auth/operations";
-import PublicRoute from "./components/PublicRoute/PublicRoute";
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Layout from "./components/Layout/Layout";
-import { selectIsLoading } from "./redux/selectors";
-import Loader from "./components/Loader/Loader";
 
-const App = () => {
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "./shared/components/Loader/Loader";
+import Layout from "./pages/Layout/Layout";
+import AuthPage from "./pages/AuthPage/AuthPage";
+
+import { currentUser } from "./redux/auth/operations";
+import { selectIsRefreshing, selectToken } from "./redux/auth/authSelectors";
+
+import { PublicRoute } from "./PublicRoute";
+
+import { ScreenPage } from "./pages/ScreenPage/ScreenPage";
+import { PrivateRoute } from "./PrivateRoute";
+import TrainingPage from "./pages/TrainingPage/TrainingPage";
+
+function App() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(currentUserThunk());
+    dispatch(currentUser());
   }, [dispatch]);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<LoginPage />} />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <RegisterPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <LoginPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/dictionary"
-            element={
-              <PrivateRoute>
-                <DictionaryPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/recommend"
-            element={
-              <PrivateRoute>
-                <RecommendPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/training"
-            element={
-              <PrivateRoute>
-                <TrainingPage />
-              </PrivateRoute>
-            }
-          />
-        </Route>
-      </Routes>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        transition:Bounce
-      />
+      {isRefreshing ? (
+        <Loader />
+      ) : (
+        <>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
+              ></Route>
+              <Route
+                path="/:id"
+                element={
+                  <PublicRoute restricted>
+                    <AuthPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/home/:id"
+                element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
+              />
+              <Route
+                path="/training"
+                element={<PrivateRoute>{<TrainingPage />}</PrivateRoute>}
+              />
+            </Route>
+            <Route path="*" element={<AuthPage />} />
+          </Routes>
+          <ToastContainer />
+        </>
+      )}
     </>
   );
-};
+}
 
 export default App;
