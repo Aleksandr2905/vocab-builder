@@ -33,7 +33,7 @@ function App() {
       ) : (
         <>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/login" element={<Layout />}>
               <Route
                 index
                 element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
