@@ -80,7 +80,6 @@ export const customStyles = {
   control: (defaultStyles) => ({
     ...defaultStyles,
     cursor: "pointer",
-    // background: "transparent",
     borderRadius: "20px",
     boxShadow: "none",
     color: "rgba(18, 20, 23, 1)",

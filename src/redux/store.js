@@ -14,8 +14,6 @@ import {
 } from "redux-persist/es/constants";
 import { wordsReducer } from "./words/wordSlice";
 
-// const isDevelopment = process.env.NODE_ENV === "development";
-
 const authPersistConfig = {
   key: "auth",
   storage,
@@ -28,7 +26,6 @@ const rootReducer = {
 
 export const store = configureStore({
   reducer: rootReducer,
-  // devTools: isDevelopment,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

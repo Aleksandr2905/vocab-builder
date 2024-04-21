@@ -33,7 +33,6 @@ const TrainingRoom = ({
   const [uaTranslation, setUaTranslation] = useState("");
   const [enTranslation, setEnTranslation] = useState("");
 
-  // const [tasks, setTasks] = useState([]);
   const [answers, setAnswers] = useState([]);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,10 +48,6 @@ const TrainingRoom = ({
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  // useEffect(() => {
-  //   setTasks((prevTasks) => [...prevTasks, currentTask]);
-  // }, [currentTask]);
 
   const handleTranslationChange = (e) => {
     if (isUaTask) {
@@ -93,9 +88,6 @@ const TrainingRoom = ({
     setUaTranslation("");
     setEnTranslation("");
   };
-  // useEffect(() => {
-  //   console.log("use", answers);
-  // }, [answers]);
 
   const handleSaveClick = () => {
     if (answers.length === currentTaskIndex) {

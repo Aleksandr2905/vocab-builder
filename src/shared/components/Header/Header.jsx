@@ -62,7 +62,7 @@ export const Header = () => {
             <s.BtnLogOut onClick={handleLogout}>
               Log out
               <s.SvgLogOut>
-                <use href={icon + "#icon-exit"}></use>
+                <use href={icon + "#icon-linie"}></use>
               </s.SvgLogOut>
             </s.BtnLogOut>
             {!isMenuOpen ? (
@@ -90,15 +90,14 @@ export const Header = () => {
               </s.SvgBurgerClose>
             </s.BtnBurgerClose>
           </s.WrapperMenu>
-          <s.WrapBurgerLogOut>
-            <s.BtnLogOutBurger onClick={handleLogout}>
-              Log out
-              <s.SvgLogOutBurger>
-                <use href={icon + "#icon-exit"}></use>
-              </s.SvgLogOutBurger>
-            </s.BtnLogOutBurger>
-          </s.WrapBurgerLogOut>
+          <s.WrapBurgerLogOut></s.WrapBurgerLogOut>
           <Navigation />
+          <s.BtnLogOutBurger onClick={handleLogout}>
+            Log out
+            <s.SvgLogOutBurger>
+              <use href={icon + "#icon-linie"}></use>
+            </s.SvgLogOutBurger>
+          </s.BtnLogOutBurger>
           <s.BurgerPicture>
             <source
               srcSet={illustrationTablet2xWebp}

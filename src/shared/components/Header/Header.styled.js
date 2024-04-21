@@ -87,6 +87,11 @@ export const BtnLogOut = styled.button`
   background-color: transparent;
   border: none;
   display: none;
+  &:hover,
+  &:focus {
+    color: rgba(18, 20, 23, 0.5);
+    transition: all 250ms linear;
+  }
   @media screen and (min-width: ${desktop}) {
     display: flex;
     align-items: center;
@@ -244,6 +249,12 @@ export const BtnLogOutBurger = styled.button`
   font-family: "Medium";
   font-size: 16px;
   line-height: normal;
+  padding: 0;
+  &:hover,
+  &:focus {
+    color: rgba(252, 252, 252, 0.5);
+    transition: all 250ms linear;
+  }
 `;
 
 export const SvgLogOutBurger = styled.svg`
