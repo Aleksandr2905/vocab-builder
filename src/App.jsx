@@ -10,7 +10,7 @@ import Layout from "./pages/Layout/Layout";
 import AuthPage from "./pages/AuthPage/AuthPage";
 
 import { currentUser } from "./redux/auth/operations";
-import { selectIsRefreshing, selectToken } from "./redux/auth/authSelectors";
+import { selectIsRefreshing } from "./redux/auth/authSelectors";
 
 import { PublicRoute } from "./PublicRoute";
 
@@ -33,28 +33,28 @@ function App() {
       ) : (
         <>
           <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route
-                index
-                element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
-              ></Route>
-              <Route
-                path="/:id"
-                element={
-                  <PublicRoute restricted>
-                    <AuthPage />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/home/:id"
-                element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
-              />
-              <Route
-                path="/training"
-                element={<PrivateRoute>{<TrainingPage />}</PrivateRoute>}
-              />
-            </Route>
+            {/* <Route path="/" element={<Layout />}> */}
+            <Route
+              path="/"
+              element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
+            ></Route>
+            <Route
+              path="/:id"
+              element={
+                <PublicRoute restricted>
+                  <AuthPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/home/:id"
+              element={<PrivateRoute>{<ScreenPage />}</PrivateRoute>}
+            />
+            <Route
+              path="/training"
+              element={<PrivateRoute>{<TrainingPage />}</PrivateRoute>}
+            />
+            {/* </Route> */}
             <Route path="*" element={<Layout />} />
           </Routes>
           <ToastContainer />
