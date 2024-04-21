@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const ModalOverlay = styled.div`
@@ -33,17 +33,17 @@ const ModalOpen = ({ closeModal, children }) => {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleKeydown);
     };
-  });
+  }, []);
 
   const handleKeydown = ({ code }) => {
     if (code === "Escape") {
-      onclose();
+      closeModal();
     }
   };
 
   const handleBackdropClick = ({ currentTarget, target }) => {
     if (currentTarget === target) {
-      onclose();
+      closeModal();
     }
   };
 
