@@ -48,7 +48,9 @@ import bloodReportMobile2xWebp from "../../shared/images/blood-report2xmobileWeb
 export const ScreenPage = () => {
   const dispatch = useDispatch();
   const recommend = useSelector(allWords);
+  console.log(recommend);
   const dictionary = useSelector(ownWords);
+  console.log("dictionary", dictionary);
   const { id } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = useSelector(totalPagesWords);
