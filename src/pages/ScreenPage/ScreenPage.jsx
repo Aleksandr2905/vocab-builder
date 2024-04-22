@@ -57,6 +57,18 @@ export const ScreenPage = () => {
   const queryParams = new URLSearchParams(search);
   const openParam = queryParams.get("open");
 
+  const [perPage, setPerPage] = useState("");
+  // const perPage = useSelector(perPageWords);
+
+  useEffect(() => {
+    if (id === "recommend") {
+      setPerPage(recommend.length);
+    }
+    if (id === "dictionary") {
+      setPerPage(dictionary.length);
+    }
+  }, [dispatch, recommend, dictionary, id]);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [id, totalPages]);
