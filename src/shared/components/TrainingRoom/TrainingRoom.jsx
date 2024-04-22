@@ -32,11 +32,9 @@ const TrainingRoom = ({
 }) => {
   const [uaTranslation, setUaTranslation] = useState("");
   const [enTranslation, setEnTranslation] = useState("");
-
   const [answers, setAnswers] = useState([]);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
   const isUaTask = currentTask.task === "ua";
   const isEnTask = currentTask.task === "en";
   const dispatch = useDispatch();
@@ -58,8 +56,10 @@ const TrainingRoom = ({
   };
 
   const handleNextClick = () => {
-    if (uaTranslation === "" && enTranslation === "") {
-      return toast.info("Check your input");
+    if (isUaTask && !uaTranslation.trim()) {
+      return toast.info("Please enter Ukrainian translation.");
+    } else if (isEnTask && !enTranslation.trim()) {
+      return toast.info("Please enter English translation.");
     }
     onNextClick({ ua: uaTranslation, en: enTranslation });
     const updatedAnswers = isUaTask
@@ -83,7 +83,6 @@ const TrainingRoom = ({
           },
         ]
       : answers;
-
     setAnswers(updatedAnswers);
     setUaTranslation("");
     setEnTranslation("");
@@ -91,8 +90,10 @@ const TrainingRoom = ({
 
   const handleSaveClick = () => {
     if (answers.length === currentTaskIndex) {
-      if (uaTranslation === "" && enTranslation === "") {
-        return toast.info("Check your input");
+      if (isUaTask && !uaTranslation.trim()) {
+        return toast.info("Please enter Ukrainian translation.");
+      } else if (isEnTask && !enTranslation.trim()) {
+        return toast.info("Please enter English translation.");
       }
       const updatedAnswers = isUaTask
         ? dispatch(
@@ -126,6 +127,7 @@ const TrainingRoom = ({
     setEnTranslation("");
     openModal();
   };
+
   const handleCancelClick = () => {
     setAnswers([]);
     setUaTranslation("");
@@ -140,7 +142,7 @@ const TrainingRoom = ({
           <LabelTranslate>
             {isUaTask ? (
               <InputTranslate
-                placeholder={"Введіть переклад"}
+                placeholder={"Enter Ukrainian translation"}
                 type="text"
                 value={uaTranslation}
                 onChange={handleTranslationChange}
@@ -172,7 +174,7 @@ const TrainingRoom = ({
           <LabelTranslate>
             {isEnTask ? (
               <InputTranslate
-                placeholder={"Please translate"}
+                placeholder={"Enter English translation"}
                 type="text"
                 value={enTranslation}
                 onChange={handleTranslationChange}
