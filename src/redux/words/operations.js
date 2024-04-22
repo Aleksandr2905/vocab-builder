@@ -3,26 +3,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { instance } from "../auth/operations";
 
-const showToast = (error, errorCode) => {
-  let errorMessage = `Error: ${error}`;
-  if (errorCode === 400) {
-    errorMessage = "Bad request. Please check your input.";
-  } else if (errorCode === 401) {
-    errorMessage =
-      "Unauthorized. You don't have permission to access this resource.";
-  } else if (errorCode === 404) {
-    errorMessage = "Not found. The requested resource could not be found.";
-  } else if (errorCode === 500) {
-    errorMessage =
-      "Server error. Something went wrong on our end. Please try again later.";
-  }
-
-  toast.error(errorMessage, {
-    position: toast.POSITION.TOP_RIGHT,
-    autoClose: 3000,
-  });
-};
-
 export const fetchWords = createAsyncThunk(
   "words/all",
   async ({ page, search, category, verb }, { rejectWithValue }) => {
@@ -30,10 +10,27 @@ export const fetchWords = createAsyncThunk(
       const { data } = await instance.get(
         `words/all?keyword=${search}&category=${category}&isIrregular=${verb}&page=${page}`
       );
+
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -45,8 +42,24 @@ export const wordsCategories = createAsyncThunk(
       const { data } = await instance.get("words/categories");
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -58,8 +71,24 @@ export const wordsCreate = createAsyncThunk(
       const response = await instance.post(`words/create`, body);
       return response.data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -71,8 +100,24 @@ export const wordsAdd = createAsyncThunk(
       const { data } = await instance.post(`words/add/${wordId}`);
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -84,8 +129,24 @@ export const deleteWords = createAsyncThunk(
       await instance.delete(`words/delete/${wordsId}`);
       return wordsId;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -100,8 +161,24 @@ export const wordsEdit = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -114,8 +191,24 @@ export const wordsAll = createAsyncThunk(
 
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -129,8 +222,24 @@ export const wordsOwn = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -142,8 +251,24 @@ export const wordsStatistics = createAsyncThunk(
       const { data } = await instance.get(`words/statistics`);
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -155,8 +280,24 @@ export const wordsTasks = createAsyncThunk(
       const response = await instance.get(`words/tasks`);
       return response.data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -168,8 +309,24 @@ export const wordsAnswers = createAsyncThunk(
       const { data } = await instance.post("/words/answers", answers);
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Bad request. Please check your input.");
+          break;
+        case 401:
+          toast.error(
+            "Unauthorized. You don't have permission to access this resource."
+          );
+          break;
+        case 404:
+          toast.error("Not found. The requested resource could not be found.");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );

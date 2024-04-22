@@ -27,10 +27,12 @@ import {
 const schema = yup.object({
   en: yup
     .string()
+    .required("Field required")
     .matches(/\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/, "Invalid English format"),
 
   ua: yup
     .string()
+    .required("Field required")
     .matches(/^(?![A-Za-z])[А-ЯІЄЇҐґа-яієїʼ\s]+$/u, "Invalid Ukrainian format"),
 });
 

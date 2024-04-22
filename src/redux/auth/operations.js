@@ -1,30 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-const showToast = (errorCode) => {
-  let errorMessage = "An unexpected error occurred. Please try again.";
-
-  if (errorCode === 400) {
-    errorMessage = "Bad request. Please check your input.";
-  } else if (errorCode === 401) {
-    errorMessage = "Email or password invalid. Please check your credentials.";
-  } else if (errorCode === 404) {
-    errorMessage =
-      "Service not found. The requested resource could not be located.";
-  } else if (errorCode === 409) {
-    errorMessage = "Such email already exists. Please use a different email.";
-  } else if (errorCode === 500) {
-    errorMessage =
-      "Server error. Something went wrong on our end. Please try again later.";
-  }
-
-  toast.error(errorMessage, {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 5000,
-  });
-};
 
 export const instance = axios.create({
   baseURL: "https://vocab-builder-backend.p.goit.global/api/",
@@ -48,12 +24,27 @@ export const signup = createAsyncThunk(
     try {
       const user = await instance.post("/users/signup", body);
       setToken(user.data.token);
+      toast.success("Successful operation");
       localStorage.setItem("refreshToken", user.data.token);
       localStorage.setItem("accessToken", user.data.token);
       return user.data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Email or password invalid");
+          break;
+        case 404:
+          toast.error("Service not found");
+          break;
+        case 409:
+          toast.error("Such email already exists");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -64,12 +55,27 @@ export const signin = createAsyncThunk(
     try {
       const user = await instance.post("/users/signin", body);
       setToken(user.data.token);
+      toast.success("Successful operation");
       localStorage.setItem("refreshToken", user.data.token);
       localStorage.setItem("accessToken", user.data.token);
       return user.data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Email or password invalid");
+          break;
+        case 404:
+          toast.error("Service not found");
+          break;
+        case 409:
+          toast.error("Such email already exists");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -79,11 +85,26 @@ export const signOut = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await instance.post("/users/signout");
+      toast.success("Successful operation");
       localStorage.clear("refreshToken");
       localStorage.clear("accessToken");
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Email or password invalid");
+          break;
+        case 404:
+          toast.error("Service not found");
+          break;
+        case 409:
+          toast.error("Such email already exists");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );
@@ -101,8 +122,22 @@ export const currentUser = createAsyncThunk(
 
       return data;
     } catch (error) {
-      showToast(error.message, error.response?.status);
-      return thunkAPI.rejectWithValue(error.message);
+      switch (error.response?.status) {
+        case 400:
+          toast.error("Email or password invalid");
+          break;
+        case 404:
+          toast.error("Service not found");
+          break;
+        case 409:
+          toast.error("Such email already exists");
+          break;
+        case 500:
+          toast.error("Server error");
+          break;
+        default:
+          return rejectWithValue(error);
+      }
     }
   }
 );

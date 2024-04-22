@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./shared/components/Loader/Loader";
 import Layout from "./pages/Layout/Layout";
@@ -55,7 +54,19 @@ function App() {
             />
             <Route path="*" element={<AuthPage />} />
           </Routes>
-          <ToastContainer />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition:Bounce
+          />
         </>
       )}
     </>

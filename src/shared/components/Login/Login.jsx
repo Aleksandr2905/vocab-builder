@@ -68,7 +68,7 @@ const Login = () => {
     const { email, password } = values;
     dispatch(signin({ email, password }))
       .unwrap()
-      .then(() => navigate("/home/recommend"))
+      .then(() => navigate("/home/dictionary"))
       .then(() => resetForm());
   };
   return (
