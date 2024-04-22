@@ -112,7 +112,8 @@ export const signOut = createAsyncThunk(
 export const currentUser = createAsyncThunk(
   "auth/user",
   async (_, thunkAPI) => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = thunkAPI.getState.auth.token;
+    console.log(accessToken);
     if (!accessToken) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
