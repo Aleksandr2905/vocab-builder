@@ -96,12 +96,12 @@ const TableComponent = ({
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {rows.map((row, rowIndex) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} key={rowIndex}>
                 {row.cells.map((cell, index) => (
-                  <Td {...cell.getCellProps()}>
+                  <Td {...cell.getCellProps()} key={index}>
                     {index === row.cells.length - 1 ? (
                       id === "recommend" ? (
                         <Button onClick={() => addWordToOwn(row.original._id)}>
@@ -119,13 +119,13 @@ const TableComponent = ({
                               </SvgDate>
                             </Button>
                           ) : (
-                            <Button onClick={() => openModal(row.id)}>
+                            <Button onClick={() => openModal(rowIndex)}>
                               <SvgDate>
                                 <use href={sprite + "#icon-date"}></use>
                               </SvgDate>
                             </Button>
                           )}
-                          {selectedRowIndex === row.id && (
+                          {selectedRowIndex === rowIndex && (
                             <ModalOpen closeModal={closeModal} isOpen={isOpen}>
                               {isOpenEdit ? (
                                 <ButtonModal onClick={() => closeModalEdit()}>
@@ -136,7 +136,7 @@ const TableComponent = ({
                                 </ButtonModal>
                               ) : (
                                 <ButtonModal
-                                  onClick={() => openModalEdit(row.id)}
+                                  onClick={() => openModalEdit(rowIndex)}
                                 >
                                   <SvgModal>
                                     <use href={sprite + "#icon-edit"}></use>
@@ -144,7 +144,7 @@ const TableComponent = ({
                                   Edit
                                 </ButtonModal>
                               )}
-                              {selectedRowIndexEdit === row.id && (
+                              {selectedRowIndexEdit === rowIndex && (
                                 <Modal
                                   onClose={closeModalEdit}
                                   isOpen={isOpenEdit}
